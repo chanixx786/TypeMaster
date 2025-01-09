@@ -27,14 +27,14 @@ const TimeCategory = () => {
   const progress = (timeRemaining / (Number(minutes) * 60)) * 100;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="min-h-screen bg-gray-700/30 p-8 rounded-lg">
+      <div className="max-w-md mx-auto rounded-xl shadow-lg overflow-hidden">
         <div className="p-8">
           {/* Timer Header */}
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center space-x-2">
               <Timer className="w-6 h-6 text-blue-500" />
-              <h2 className="text-xl font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-white">
                 {minutes} {Number(minutes) === 1 ? "minute" : "minutes"}
               </h2>
             </div>
@@ -45,7 +45,7 @@ const TimeCategory = () => {
 
           {/* Timer Display */}
           <div className="text-center mb-6">
-            <div className="text-5xl font-bold text-gray-800 mb-2">
+            <div className="text-5xl font-bold text-white mb-2">
               {formatTime(timeRemaining)}
             </div>
             <p className="text-gray-500">Time Remaining</p>
