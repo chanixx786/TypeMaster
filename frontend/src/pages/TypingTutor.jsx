@@ -175,7 +175,7 @@ const TypingCorrection = ({ text, reference_text, time_taken, accuracy }) => {
 
         try {
           const response = await fetch(
-            "http://localhost:5000/api/analyze-text",
+            "https://typemaster-uoru.onrender.com/api/analyze-text",
             {
               method: "POST",
               headers: {
