@@ -82,9 +82,9 @@ const TestDashboard = () => {
       case "oneMinute":
         return "1 Minute Test";
       case "threeMinutes":
-        return "3 Minutes Tests";
+        return "3 Minutes Test";
       case "fiveMinutes":
-        return "5 Minutes Tests";
+        return "5 Minutes Test";
       default:
         return "";
     }
