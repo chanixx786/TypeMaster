@@ -11,41 +11,39 @@ class TypingAnalyzer:
     def __init__(self):
         print("Loading models...")
         try:
+            device = 0 if torch.cuda.is_available() else -1
+            precision = torch.float16 if torch.cuda.is_available() else None 
+
             self.performance_classifier = pipeline(
-                "zero-shot-classification",
-                model="facebook/bart-large-mnli",
-                device=0 if torch.cuda.is_available() else -1
-            )
+    "zero-shot-classification",
+    model="valhalla/distilbart-mnli-12-6",  # Lighter na model
+    device=0 if torch.cuda.is_available() else -1,
+    torch_dtype=torch.float16 if torch.cuda.is_available() else None
+)
+
             print("Models loaded successfully!")
         except Exception as e:
             print(f"Error loading models: {str(e)}")
             self.performance_classifier = None
 
     def analyze_session(self, typed_text: str, reference_text: str, time_taken: float, accuracy: float = None) -> Dict:
-        """
-        Analyze a typing test session with optional provided accuracy
-        """
         if not typed_text or not reference_text:
             raise ValueError("Both typed text and reference text are required")
 
         total_characters = len(typed_text)
         words = len(typed_text.split())
         minutes = time_taken / 60
-        
         wpm = words / minutes if minutes > 0 else 0
-        
+
         if accuracy is None:
             correct_chars = sum(1 for i, j in zip(typed_text, reference_text) if i == j)
             accuracy = (correct_chars / len(reference_text)) * 100 if reference_text else 0
 
-        errors = []
-        for i, (typed, ref) in enumerate(zip(typed_text, reference_text)):
-            if typed != ref:
-                errors.append({
-                    'position': i,
-                    'typed': typed,
-                    'expected': ref
-                })
+        errors = [
+            {'position': i, 'typed': typed, 'expected': ref}
+            for i, (typed, ref) in enumerate(zip(typed_text, reference_text))
+            if typed != ref
+        ]
 
         performance_categories = [
             "Needs Practice",
@@ -53,7 +51,7 @@ class TypingAnalyzer:
             "Good Performance",
             "Excellent Performance"
         ]
-        
+
         try:
             performance = self.performance_classifier(
                 f"WPM: {wpm:.1f}, Accuracy: {accuracy:.1f}%",
@@ -79,9 +77,8 @@ class TypingAnalyzer:
         }
 
     def _generate_feedback(self, wpm: float, accuracy: float, error_count: int) -> str:
-        """Generate personalized feedback based on performance metrics"""
         feedback = []
-        
+
         if wpm < 30:
             feedback.append("Your typing speed needs improvement. Focus on building muscle memory through regular practice.")
         elif wpm < 50:
@@ -90,19 +87,19 @@ class TypingAnalyzer:
             feedback.append("Good typing speed! You're above average. Work on consistency to maintain this level.")
         else:
             feedback.append("Excellent typing speed! You're performing at an advanced level.")
-        
+
         if accuracy < 90:
             feedback.append("Focus on accuracy over speed. Take time to type each character correctly.")
         elif accuracy < 95:
             feedback.append("Good accuracy, but there's room for improvement. Pay attention to common error patterns.")
         else:
             feedback.append("Outstanding accuracy! Keep up the great work.")
-        
+
         if error_count > 10:
             feedback.append("Consider slowing down to reduce errors. Practice with shorter texts first.")
         elif error_count > 5:
             feedback.append("Work on reducing errors by practicing problem areas.")
-        
+
         return " ".join(feedback)
 
 analyzer = TypingAnalyzer()
