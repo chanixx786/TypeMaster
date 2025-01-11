@@ -3,6 +3,7 @@ from flask_cors import CORS
 from transformers import pipeline
 import torch
 from typing import Dict, List
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -140,4 +141,4 @@ def analyze_text():
         return jsonify({'error': 'An unexpected error occurred. Please try again later.'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, threaded=True)
+    app.run(debug=True, port=int(os.environ.get('PORT', 5000)), threaded=True)
