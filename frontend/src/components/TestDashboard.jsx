@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { useNavigate } from "react-router-dom";
 
 const TestDashboard = () => {
   const [results, setResults] = useState({
@@ -90,6 +91,8 @@ const TestDashboard = () => {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen p-6">
       <div className="grid grid-cols-12 gap-6 max-w-7xl mx-auto">
@@ -100,19 +103,19 @@ const TestDashboard = () => {
           
           <div className="space-y-4">
             <button
-              onClick={() => window.location.href = "/TimeCategory/1"}
+              onClick={() => navigate("/TimeCategory/1")}
               className="w-full py-3 text-white rounded-lg font-medium bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-sm"
             >
               1 Minute Challenge
             </button>
             <button
-              onClick={() => window.location.href = "/TimeCategory/3"}
+              onClick={() => navigate("/TimeCategory/3")}
               className="w-full py-3 text-white rounded-lg font-medium bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-sm"
             >
               3 Minutes Practice
             </button>
             <button
-              onClick={() => window.location.href = "/TimeCategory/5"}
+              onClick={() => navigate("/TimeCategory/5")}
               className="w-full py-3 text-white rounded-lg font-medium bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 transition-all duration-200 shadow-sm"
             >
               5 Minutes Pro
