@@ -9,7 +9,7 @@ function GameField() {
     // Helper function to dynamically load a script
     const loadScript = (src) => {
       return new Promise((resolve, reject) => {
-        if (document.getElementById(src)) {
+        if (document.querySelector(`script[src="${src}"]`)) {
           resolve();
           return;
         }
@@ -18,7 +18,7 @@ function GameField() {
         script.async = true;
         script.onload = resolve;
         script.onerror = reject;
-        script.id = src; // Set an id to identify the script
+        script.id = `script-${src.replace(/[^a-zA-Z0-9]/g, '-')}`; // Set a unique id to identify the script
         document.body.appendChild(script);
       });
     };
@@ -27,9 +27,9 @@ function GameField() {
     const loadScripts = async () => {
       try {
         await loadScript("https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js");
-        await loadScript("/src/components/GameJS/dictionary.js");
-        await loadScript("/src/components/GameJS/util.js");
-        await loadScript("/src/components/GameJS/stereotype.js");
+        await loadScript("/assets/dictionary.js");
+        await loadScript("/assets/util.js");
+        await loadScript("/assets/stereotype.js");
         console.log("All scripts loaded successfully");
       } catch (error) {
         console.error("Error loading script:", error);
@@ -52,12 +52,12 @@ function GameField() {
       // Remove previously loaded scripts
       const scripts = [
         "https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js",
-        "/src/components/GameJS/dictionary.js",
-        "/src/components/GameJS/util.js",
-        "/src/components/GameJS/stereotype.js"
+        "/assets/dictionary.js",
+        "/assets/util.js",
+        "/assets/stereotype.js"
       ];
       scripts.forEach(src => {
-        const script = document.getElementById(src);
+        const script = document.getElementById(`script--${src.replace(/[^a-zA-Z0-9]/g, '-')}`);
         if (script) {
           document.body.removeChild(script);
         }
