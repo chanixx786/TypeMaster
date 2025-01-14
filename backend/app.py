@@ -5,7 +5,6 @@ import torch
 from typing import Dict, List
 
 import os
-
 port = int(os.getenv('PORT', 5000))
 
 app = Flask(__name__)
