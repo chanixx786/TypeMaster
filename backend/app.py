@@ -4,6 +4,8 @@ from transformers import pipeline
 import torch
 from typing import Dict, List
 
+const port = process.env.PORT || 5000;
+
 app = Flask(__name__)
 CORS(app)
 
@@ -137,4 +139,4 @@ def analyze_text():
         return jsonify({'error': 'An unexpected error occurred. Please try again later.'}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, threaded=True)
+    app.run(debug=True, port=port, threaded=True)
