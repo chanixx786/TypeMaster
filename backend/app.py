@@ -96,7 +96,6 @@ class TypingAnalyzer:
             f"Analyze the typing session with the following metrics:\n"
             f"- Typing Speed: {wpm:.1f} WPM\n"
             f"- Accuracy: {accuracy:.1f}%\n"
-            f"- Error Count: {error_count}\n"
             f"Provide a short summary of actionable advice to improve typing speed and accuracy. limit your response to 1 paragraph."
         )
 
