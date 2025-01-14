@@ -4,7 +4,9 @@ from transformers import pipeline
 import torch
 from typing import Dict, List
 
-const port = process.env.PORT || 5000;
+import os
+
+port = int(os.getenv('PORT', 5000))
 
 app = Flask(__name__)
 CORS(app)
