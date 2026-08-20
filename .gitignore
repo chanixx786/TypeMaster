@@ -1,0 +1,53 @@
+# =========
+# Python
+# =========
+
+venv/
+.venv/
+__pycache__/
+.env
+
+# =========
+# Frontend
+# =========
+
+# Dependencies
+node_modules/
+
+# Build output
+frontend/dist/
+frontend/dist-ssr/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Local environment files
+*.local
+
+
+# =========================
+# Editors / OS
+# =========================
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+
+# JetBrains
+.idea/
+
+# macOS
+.DS_Store
+
+# Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
