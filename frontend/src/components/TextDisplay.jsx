@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Result from "./modals/Result";
+import Result from "./modals/result";
 
 const TextDisplay = ({ timeRemaining }) => {
   const [userInput, setUserInput] = useState("");
@@ -9,7 +9,6 @@ const TextDisplay = ({ timeRemaining }) => {
   const [mistakes, setMistakes] = useState(0);
   const [startTime, setStartTime] = useState(null);
   const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState(0);
 
   const textSamples = [
     `The human genome contains approximately 3 billion base pairs of DNA, which encode around 20,000 to 25,000 genes. These genes control everything from our physical appearance to our susceptibility to certain diseases. Quantum mechanics describes the behavior of matter and energy at the molecular, atomic, nuclear, and even smaller microscopic levels. The field challenges our intuitions about how the world works.", Photosynthesis is the process by which plants convert light energy into chemical energy. This process provides the oxygen and food that sustain most life on Earth.`,
