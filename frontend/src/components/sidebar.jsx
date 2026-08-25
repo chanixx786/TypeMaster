@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Keyboard, Book, Gamepad2, Crown } from "lucide-react";
+import { Keyboard, Book, Gamepad2 } from "lucide-react";
 
 const menuItems = [
   {
