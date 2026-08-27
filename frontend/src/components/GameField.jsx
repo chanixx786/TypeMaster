@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function GameField() {
+export default function GameField() {
   const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {
@@ -27,10 +27,9 @@ function GameField() {
     const loadScripts = async () => {
       try {
         await loadScript("https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js");
-        await loadScript("/assets/dictionary.js");
-        await loadScript("/assets/util.js");
-        await loadScript("/assets/stereotype.js");
-        console.log("All scripts loaded successfully");
+        await loadScript("/GameJS/dictionary.js");
+        await loadScript("/GameJS/util.js");
+        await loadScript("/GameJS/stereotype.js");
       } catch (error) {
         console.error("Error loading script:", error);
       }
@@ -52,9 +51,9 @@ function GameField() {
       // Remove previously loaded scripts
       const scripts = [
         "https://cdnjs.cloudflare.com/ajax/libs/tone/13.0.1/Tone.min.js",
-        "/assets/dictionary.js",
-        "/assets/util.js",
-        "/assets/stereotype.js"
+        "/GameJS/dictionary.js",
+        "/GameJS/util.js",
+        "/GameJS/stereotype.js"
       ];
       scripts.forEach(src => {
         const script = document.getElementById(`script--${src.replace(/[^a-zA-Z0-9]/g, '-')}`);
@@ -81,5 +80,3 @@ function GameField() {
     </div>
   );
 }
-
-export default GameField;
