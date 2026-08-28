@@ -9,10 +9,8 @@ import {
 
 // Pages
 import TypingGame from "./pages/game";
-import TypingTest from "./pages/TypingTest";
+import Test from "./pages/test";
 import TypingTutor from "./pages/tutor";
-import TimeCategory from "./pages/TimeCategory";
-
 // Layouts
 import AdminLayout from "./layout/admin_layout";
 import UserLayout from "./layout/user_layout";
@@ -20,15 +18,16 @@ import UserLayout from "./layout/user_layout";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      {/* Admin */}
       <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<TypingTest />} /> {/* Default route */}
-        <Route path="tutor" element={<TypingTutor />} />
-        <Route path="game" element={<TypingGame />} />
-        <Route path="TimeCategory/:minutes" element={<TimeCategory />} />
       </Route>
 
+      {/* User */}
       <Route path="/" element={<UserLayout />}>
-        <Route index element={<TypingTest />} /> {/* Default route for user layout */}
+        <Route index element={<Test />} /> 
+        <Route path="/tutor" element={<TypingTutor />} />
+        <Route path="/game" element={<TypingGame />} />
+        <Route path="/leaderboard" element={<TypingTutor />} />
       </Route>
     </>,
   ),
