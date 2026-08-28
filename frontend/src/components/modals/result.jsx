@@ -1,5 +1,5 @@
 import React from "react";
-import { Brain, Trophy, Target, TrendingUp, X } from "lucide-react";
+import { Trophy, Target, TrendingUp, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Result = ({ isOpen, onClose, finalSpeed, accuracy, totalWords }) => {
