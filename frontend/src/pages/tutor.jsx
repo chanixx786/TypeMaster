@@ -211,7 +211,7 @@ const TypingCorrection = ({ text, reference_text, time_taken, accuracy }) => {
   }, [text, reference_text, time_taken]);
 
   return (
-    <div className="mt-6 space-y-4">
+    <div className="h-full mt-6 space-y-4">
       <h3 className="text-lg font-medium text-gray-200">Typing Analysis</h3>
 
       {loading ? (
