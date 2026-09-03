@@ -22,7 +22,6 @@ source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 cp .env.example .env
-# edit .env — point BASE_URL / API_BASE_URL at your local dev servers
 
 # make sure frontend + backend are running locally first (see root README),
 # then in a separate terminal:
