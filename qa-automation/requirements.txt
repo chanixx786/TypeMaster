@@ -1,0 +1,8 @@
+robotframework==7.1.1
+robotframework-seleniumlibrary==6.9.0
+robotframework-requests==0.9.7
+selenium==4.27.1
+webdriver-manager==4.0.2
+python-dotenv==1.0.1
+sqlalchemy==2.0.35
+psycopg-binary==3.3.4
