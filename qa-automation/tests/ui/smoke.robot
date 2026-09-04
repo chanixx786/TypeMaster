@@ -16,3 +16,24 @@ Homepage Loads Successfully
 Page Body Is Rendered
     ${body_text}=    Get Text    tag:body
     Should Not Be Empty    ${body_text}
+
+Navbar Displays All Expected Nav Items
+    ${body_text}=    Get Text    tag:body
+    Should Contain    ${body_text}    Test
+    Should Contain    ${body_text}    Tutor
+    Should Contain    ${body_text}    Game
+    Should Contain    ${body_text}    Leaderboard
+
+Navbar Logo Is Visible
+    ${body_text}=    Get Text    tag:body
+    Should Contain    ${body_text}    TypeMaster
+
+Typing Test Input Is Present On Load
+    Wait Until Element Is Visible    css:textarea[aria-label="Typing test input"]    timeout=10s
+    Element Should Be Visible    css:textarea[aria-label="Typing test input"]
+
+Duration Options Are Selectable
+    ${body_text}=    Get Text    tag:body
+    Should Contain    ${body_text}    60s
+    Should Contain    ${body_text}    180s
+    Should Contain    ${body_text}    300s

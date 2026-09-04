@@ -1,6 +1,6 @@
 from app.extension import db
 
-class Test_Result(db.Model):
+class TestResult(db.Model):
     __tablename__ = "test_results"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -9,4 +9,7 @@ class Test_Result(db.Model):
     date_taken = db.Column(db.DateTime, nullable=False)
     wpm = db.Column(db.Integer, nullable=False)
     accuracy = db.Column(db.Integer, nullable=False)
-    
+    duration = db.Column(db.Integer, nullable=False)
+
+    user = db.relationship("User", back_populates="test_results")
+    text = db.relationship("Text", back_populates="test_results")

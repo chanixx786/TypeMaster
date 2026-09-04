@@ -1,12 +1,7 @@
 # QA Automation — TypeMaster
 
 Robot Framework + Selenium + Python test suite for the TypeMaster app.
-Lives inside the monorepo alongside `frontend/` and `backend/`, but is fully decoupled —
-it treats the app as an external system under test (drives it via browser/HTTP only,
-no direct imports of app code).
-
-See the [root README](../README.md) for what TypeMaster is. This document covers
-the automation suite only.
+See the [root README](../README.md) for what TypeMaster is. This document covers the automation suite only.
 
 ## Status
 
@@ -20,8 +15,6 @@ cd qa-automation
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-
-cp .env.example .env
 
 # make sure frontend + backend are running locally first (see root README),
 # then in a separate terminal:
@@ -51,10 +44,17 @@ qa-automation/
 
 | Suite | What it covers | Status |
 |---|---|---|
-| `tests/ui/smoke.robot` | App loads, core page elements render | ✅ working |
-| `tests/api/health_check.robot` | Backend reachable, basic response shape | ✅ working |
-| `tests/ui/typing_flow.robot` | Full typing test flow, WPM/accuracy display | ⏳ blocked on `data-testid`s + WPM feature |
-| `tests/api/score_submission.robot` | Score persists correctly via API | ⏳ blocked on scoring endpoint |
+| `tests/ui/ui_smoke.robot` | App loads, navbar renders, typing input + duration options present | ✅ working |
+| `tests/api/api_smoke.robot` | Backend reachable, `/api/typing/texts`, `/api/typing/texts/random`, `/api/typing/categories`, and full `/api/typing/submit` validation + happy path | ✅ working |
+| `tests/ui/typing_flow.robot` | Full typing test flow end-to-end: type → timer expires → WPM/accuracy/feedback display | ⏳ blocked on `data-testid`s (feature itself is live, see Notes below) |
+| `tests/ui/leaderboard.robot` | Leaderboard renders submitted scores | ⏳ blocked — leaderboard page not built yet |
+
+**Note:** score submission is no longer a separate blocked suite — `POST /api/typing/submit`
+is live and already covered end-to-end in `api_smoke.robot` (validation errors, 404 on bad
+`text_id`, and a happy-path submission that asserts `metrics.wpm`/`metrics.accuracy`/`result_id`
+come back correctly). What's still missing is a *UI-driven* version of that flow (typing
+in the browser, waiting for the on-screen result), which is what `typing_flow.robot` covers
+once locators exist.
 
 ## Adding a New Test
 
@@ -66,14 +66,20 @@ qa-automation/
 
 ## Notes for the App Side
 
-For stable UI locators (instead of brittle CSS class selectors that break on every
-Tailwind refactor), the frontend should expose `data-testid` attributes on key
+The backend scoring pipeline (`/api/typing/submit`) is done and already exercised by
+`api_smoke.robot`. What's blocking the *UI* suites now is stable locators — the frontend
+currently identifies elements with things like `aria-label="Typing test input"` and plain
+Tailwind classes, which are either inconsistent or break on every styling refactor.
+
+For stable UI locators, the frontend should expose `data-testid` attributes on key
 interactive elements:
 
-- Typing input field → `data-testid="typing-input"`
+- Typing input field → `data-testid="typing-input"` (currently only has `aria-label`)
 - Timer display → `data-testid="timer"`
 - WPM/accuracy result display → `data-testid="wpm-result"`, `data-testid="accuracy-result"`
-- Submit/finish button → `data-testid="submit-test"`
-- Leaderboard rows → `data-testid="leaderboard-row"`
+- AI feedback text block → `data-testid="feedback-text"`
+- Retry/reset button → `data-testid="retry-test"`
+- Duration option buttons → `data-testid="duration-{seconds}"` (e.g. `duration-60`)
+- Leaderboard rows → `data-testid="leaderboard-row"` (once the leaderboard page exists)
 
 Until these land, corresponding UI tests are tagged `wip`.

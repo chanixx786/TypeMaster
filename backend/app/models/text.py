@@ -7,4 +7,5 @@ class Text(db.Model):
     title = db.Column(db.String(100), nullable=True)
     content = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(50), nullable=True)
-    
+
+    test_results = db.relationship("TestResult", back_populates="text", lazy=True)
