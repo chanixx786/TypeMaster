@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1.1 (Python 3.13.7 on win32)" generated="2026-09-04T13:49:29.803534" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Christian\Projects\TypeMaster\qa-automation\tests">
+<suite id="s1-s1" name="Api" source="C:\Christian\Projects\TypeMaster\qa-automation\tests\api">
+<suite id="s1-s1-s1" name="Api Smoke" source="C:\Christian\Projects\TypeMaster\qa-automation\tests\api\api_smoke.robot">
+<test id="s1-s1-s1-t1" name="Backend Is Reachable" line="8">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:31.964508" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:31.964558" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/</arg>
+<status status="PASS" start="2026-09-04T13:49:29.908266" elapsed="2.056315"/>
+</kw>
+<kw name="Should Not Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:31.965109" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${status}</arg>
+<arg>0</arg>
+<doc>Fails if objects are equal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-04T13:49:31.964951" elapsed="0.000205"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-09-04T13:49:29.907626" elapsed="2.057775"/>
+</test>
+<test id="s1-s1-s1-t2" name="Unknown Endpoint Returns 404 Not 500" line="12">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:34.008321" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:34.008364" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/this-route-should-not-exist-xyz</arg>
+<status status="PASS" start="2026-09-04T13:49:31.966185" elapsed="2.042198"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:34.008816" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${status}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-04T13:49:34.008662" elapsed="0.000200"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-09-04T13:49:31.965821" elapsed="2.043230"/>
+</test>
+<test id="s1-s1-s1-t3" name="Get All Texts Returns A List" line="16">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:36.070519" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:36.070568" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/texts</arg>
+<status status="PASS" start="2026-09-04T13:49:34.009913" elapsed="2.060677"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:36.071248" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-09-04T13:49:36.071351" level="FAIL">404 != 200</msg>
+<arg>${status}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-09-04T13:49:36.071103" elapsed="0.000378">404 != 200</status>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($body, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:36.071739" elapsed="0.000020"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:34.009496" elapsed="2.062479">404 != 200</status>
+</test>
+<test id="s1-s1-s1-t4" name="Get Random Text Returns A Valid Text Object" line="21">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:38.117550" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:38.117587" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/texts/random</arg>
+<status status="PASS" start="2026-09-04T13:49:36.072612" elapsed="2.044992"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:38.117922" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-09-04T13:49:38.117992" level="FAIL">404 != 200</msg>
+<arg>${status}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-09-04T13:49:38.117803" elapsed="0.000246">404 != 200</status>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}</arg>
+<arg>id</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:38.118264" elapsed="0.000016"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}</arg>
+<arg>content</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:38.118398" elapsed="0.000012"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}</arg>
+<arg>category</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:38.118499" elapsed="0.000010"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${body}[content]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:38.118595" elapsed="0.000011"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:36.072373" elapsed="2.046355">404 != 200</status>
+</test>
+<test id="s1-s1-s1-t5" name="Get Random Text Filtered By Category Returns Matching Category" line="29">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:40.139068" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:40.139109" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/texts/random?category=programming</arg>
+<status status="PASS" start="2026-09-04T13:49:38.119256" elapsed="2.019872"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:40.139606" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-09-04T13:49:40.139701" level="FAIL">404 != 200</msg>
+<arg>${status}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-09-04T13:49:40.139420" elapsed="0.000342">404 != 200</status>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${body}[category]</arg>
+<arg>programming</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:40.140108" elapsed="0.000035"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:38.119004" elapsed="2.021405">404 != 200</status>
+</test>
+<test id="s1-s1-s1-t6" name="Get Categories Returns A List" line="34">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:42.185624" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:42.185659" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/categories</arg>
+<status status="PASS" start="2026-09-04T13:49:40.141308" elapsed="2.044520"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:42.186721" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-09-04T13:49:42.186785" level="FAIL">404 != 200</msg>
+<arg>${status}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-09-04T13:49:42.186424" elapsed="0.000405">404 != 200</status>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>isinstance($body, list)</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:42.186982" elapsed="0.000013"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:40.140890" elapsed="2.046383">404 != 200</status>
+</test>
+<test id="s1-s1-s1-t7" name="Submit Without Payload Returns 400" line="39">
+<kw name="Post" owner="APIClient">
+<msg time="2026-09-04T13:49:42.188487" level="FAIL">ValueError: Argument 'json_body' got value '' that cannot be converted to Dict[str, Any] or None.</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/submit</arg>
+<arg>${EMPTY}</arg>
+<status status="FAIL" start="2026-09-04T13:49:42.188002" elapsed="0.000587">ValueError: Argument 'json_body' got value '' that cannot be converted to Dict[str, Any] or None.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${status}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:42.188769" elapsed="0.000017"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}</arg>
+<arg>error</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:42.188909" elapsed="0.000017"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:42.187664" elapsed="0.001400">ValueError: Argument 'json_body' got value '' that cannot be converted to Dict[str, Any] or None.</status>
+</test>
+<test id="s1-s1-s1-t8" name="Submit Missing Required Fields Returns 400" line="44">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-04T13:49:42.189912" level="INFO">&amp;{payload} = { user_id=1 }</msg>
+<var>&amp;{payload}</var>
+<arg>user_id=1</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-04T13:49:42.189696" elapsed="0.000235"/>
+</kw>
+<kw name="Post" owner="APIClient">
+<msg time="2026-09-04T13:49:44.266067" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:44.266105" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/submit</arg>
+<arg>${payload}</arg>
+<status status="PASS" start="2026-09-04T13:49:42.190048" elapsed="2.076073"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:44.266449" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<msg time="2026-09-04T13:49:44.266522" level="FAIL">404 != 400</msg>
+<arg>${status}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="FAIL" start="2026-09-04T13:49:44.266316" elapsed="0.000251">404 != 400</status>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:42.189427" elapsed="2.077294">404 != 400</status>
+</test>
+<test id="s1-s1-s1-t9" name="Submit With Nonexistent Text Id Returns 404" line="49">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-04T13:49:44.267560" level="INFO">&amp;{payload} = { user_id=1 | text_id=999999999 | typed_text=hello world | time_taken=10 }</msg>
+<var>&amp;{payload}</var>
+<arg>user_id=1</arg>
+<arg>text_id=999999999</arg>
+<arg>typed_text=hello world</arg>
+<arg>time_taken=10</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-04T13:49:44.267310" elapsed="0.000276"/>
+</kw>
+<kw name="Post" owner="APIClient">
+<msg time="2026-09-04T13:49:46.344153" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:46.344280" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/submit</arg>
+<arg>${payload}</arg>
+<status status="PASS" start="2026-09-04T13:49:44.267762" elapsed="2.076561"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:46.344901" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${status}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-04T13:49:46.344680" elapsed="0.000283"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-09-04T13:49:44.267063" elapsed="2.078106"/>
+</test>
+<test id="s1-s1-s1-t10" name="Submit With Zero Time Taken Returns 400" line="58">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:48.405079" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:48.405117" level="INFO">${text_body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${text_body}</var>
+<arg>/api/typing/texts/random</arg>
+<status status="PASS" start="2026-09-04T13:49:46.346182" elapsed="2.058951"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-04T13:49:48.405575" level="FAIL">String '${text_body}' used with invalid index 'id'. To use '[id]' as a literal value, it needs to be escaped like '\[id]'.</msg>
+<var>&amp;{payload}</var>
+<arg>user_id=1</arg>
+<arg>text_id=${text_body}[id]</arg>
+<arg>typed_text=hello</arg>
+<arg>time_taken=0</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="FAIL" start="2026-09-04T13:49:48.405337" elapsed="0.000264">String '${text_body}' used with invalid index 'id'. To use '[id]' as a literal value, it needs to be escaped like '\[id]'.</status>
+</kw>
+<kw name="Post" owner="APIClient">
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/submit</arg>
+<arg>${payload}</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:48.405767" elapsed="0.000015"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${status}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:48.406027" elapsed="0.000023"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:46.345799" elapsed="2.060453">String '${text_body}' used with invalid index 'id'. To use '[id]' as a literal value, it needs to be escaped like '\[id]'.</status>
+</test>
+<test id="s1-s1-s1-t11" name="Submit A Valid Result Returns Computed Metrics" line="68">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:50.455899" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:50.455979" level="INFO">${text_body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${text_body}</var>
+<arg>/api/typing/texts/random</arg>
+<status status="PASS" start="2026-09-04T13:49:48.406905" elapsed="2.049100"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-04T13:49:50.456915" level="FAIL">String '${text_body}' used with invalid index 'id'. To use '[id]' as a literal value, it needs to be escaped like '\[id]'.</msg>
+<var>&amp;{payload}</var>
+<arg>user_id=1</arg>
+<arg>text_id=${text_body}[id]</arg>
+<arg>typed_text=${text_body}[content]</arg>
+<arg>time_taken=30</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="FAIL" start="2026-09-04T13:49:50.456666" elapsed="0.000278">String '${text_body}' used with invalid index 'id'. To use '[id]' as a literal value, it needs to be escaped like '\[id]'.</status>
+</kw>
+<kw name="Post" owner="APIClient">
+<var>${status}</var>
+<var>${body}</var>
+<arg>/api/typing/submit</arg>
+<arg>${payload}</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:50.457132" elapsed="0.000015"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${status}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:50.457255" elapsed="0.000014"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}</arg>
+<arg>metrics</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:50.457426" elapsed="0.000013"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}[metrics]</arg>
+<arg>wpm</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:50.457541" elapsed="0.000010"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}[metrics]</arg>
+<arg>accuracy</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:50.457635" elapsed="0.000009"/>
+</kw>
+<kw name="Dictionary Should Contain Key">
+<arg>${body}</arg>
+<arg>result_id</arg>
+<status status="NOT RUN" start="2026-09-04T13:49:50.457717" elapsed="0.000010"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="FAIL" start="2026-09-04T13:49:48.406647" elapsed="2.051203">String '${text_body}' used with invalid index 'id'. To use '[id]' as a literal value, it needs to be escaped like '\[id]'.</status>
+</test>
+<status status="FAIL" start="2026-09-04T13:49:29.828494" elapsed="20.630017"/>
+</suite>
+<suite id="s1-s1-s2" name="Health Check" source="C:\Christian\Projects\TypeMaster\qa-automation\tests\api\health_check.robot">
+<test id="s1-s1-s2-t1" name="Backend Is Reachable" line="8">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:52.508894" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:52.508931" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/</arg>
+<status status="PASS" start="2026-09-04T13:49:50.461522" elapsed="2.047427"/>
+</kw>
+<kw name="Should Not Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:52.509328" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${status}</arg>
+<arg>0</arg>
+<doc>Fails if objects are equal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-04T13:49:52.509191" elapsed="0.000177"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-09-04T13:49:50.461294" elapsed="2.048283"/>
+</test>
+<test id="s1-s1-s2-t2" name="Unknown Endpoint Returns 404 Not 500" line="12">
+<kw name="Get" owner="APIClient">
+<msg time="2026-09-04T13:49:54.586673" level="INFO">${status} = 404</msg>
+<msg time="2026-09-04T13:49:54.586722" level="INFO">${body} = &lt;!doctype html&gt;
+&lt;html lang=en&gt;
+&lt;title&gt;404 Not Found&lt;/title&gt;
+&lt;h1&gt;Not Found&lt;/h1&gt;
+&lt;p&gt;The requested URL was not found on the server. If you entered the URL manually please check your spelling and try agai...</msg>
+<var>${status}</var>
+<var>${body}</var>
+<arg>/this-route-should-not-exist-xyz</arg>
+<status status="PASS" start="2026-09-04T13:49:52.510307" elapsed="2.076440"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-04T13:49:54.587148" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${status}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-04T13:49:54.587000" elapsed="0.000194"/>
+</kw>
+<tag>api</tag>
+<tag>smoke</tag>
+<status status="PASS" start="2026-09-04T13:49:52.509996" elapsed="2.077351"/>
+</test>
+<status status="PASS" start="2026-09-04T13:49:50.459001" elapsed="4.128924"/>
+</suite>
+<status status="FAIL" start="2026-09-04T13:49:29.827512" elapsed="24.760986"/>
+</suite>
+<suite id="s1-s2" name="Ui" source="C:\Christian\Projects\TypeMaster\qa-automation\tests\ui">
+<suite id="s1-s2-s1" name="Smoke" source="C:\Christian\Projects\TypeMaster\qa-automation\tests\ui\smoke.robot">
+<kw name="Open TypeMaster" owner="common_keywords" type="SETUP">
+<if>
+<branch type="IF" condition="'${HEADLESS}' == 'true'">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-09-04T13:49:54.947166" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x000001DE5DF9ACF0&gt;</msg>
+<var>${options}</var>
+<arg>selenium.webdriver.ChromeOptions()</arg>
+<arg>modules=selenium</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-09-04T13:49:54.946977" elapsed="0.000212"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<msg time="2026-09-04T13:49:54.947390" level="FAIL">Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</msg>
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless=new</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="FAIL" start="2026-09-04T13:49:54.947273" elapsed="0.000232">Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--window-size=1920,1080</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:54.947592" elapsed="0.000017"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>options=${options}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:54.947692" elapsed="0.000018"/>
+</kw>
+<status status="FAIL" start="2026-09-04T13:49:54.946664" elapsed="0.001088">Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</branch>
+<branch type="ELSE">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<arg>${BASE_URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:54.947857" elapsed="0.000015"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:54.947922" elapsed="0.000012"/>
+</kw>
+<status status="NOT RUN" start="2026-09-04T13:49:54.947789" elapsed="0.000164"/>
+</branch>
+<status status="FAIL" start="2026-09-04T13:49:54.946646" elapsed="0.001327">Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</if>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${DEFAULT_TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="NOT RUN" start="2026-09-04T13:49:54.948029" elapsed="0.000013"/>
+</kw>
+<doc>Opens the TypeMaster app in a browser, configured via env vars.</doc>
+<status status="FAIL" start="2026-09-04T13:49:54.946518" elapsed="0.001585">Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</kw>
+<test id="s1-s2-s1-t1" name="Homepage Loads Successfully" line="11">
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="FAIL" start="2026-09-04T13:49:54.948214" elapsed="0.000277">Parent suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</test>
+<test id="s1-s2-s1-t2" name="Page Body Is Rendered" line="16">
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="FAIL" start="2026-09-04T13:49:54.948882" elapsed="0.000207">Parent suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</test>
+<test id="s1-s2-s1-t3" name="Navbar Displays All Expected Nav Items" line="20">
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="FAIL" start="2026-09-04T13:49:54.949355" elapsed="0.000179">Parent suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</test>
+<test id="s1-s2-s1-t4" name="Navbar Logo Is Visible" line="27">
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="FAIL" start="2026-09-04T13:49:54.949842" elapsed="0.000188">Parent suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</test>
+<test id="s1-s2-s1-t5" name="Typing Test Input Is Present On Load" line="31">
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="FAIL" start="2026-09-04T13:49:54.950332" elapsed="0.000180">Parent suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</test>
+<test id="s1-s2-s1-t6" name="Duration Options Are Selectable" line="35">
+<tag>smoke</tag>
+<tag>ui</tag>
+<status status="FAIL" start="2026-09-04T13:49:54.950844" elapsed="0.000199">Parent suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</test>
+<kw name="Close TypeMaster" owner="common_keywords" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-09-04T13:49:54.951713" elapsed="0.000091"/>
+</kw>
+<doc>Closes the browser.</doc>
+<status status="PASS" start="2026-09-04T13:49:54.951558" elapsed="0.000301"/>
+</kw>
+<doc>Basic smoke checks that the TypeMaster frontend loads.</doc>
+<status status="FAIL" start="2026-09-04T13:49:54.590325" elapsed="0.361593">Suite setup failed:
+Calling method 'add_argument' failed: TypeError: ArgOptions.add_argument() got an unexpected keyword argument '--headless'</status>
+</suite>
+<status status="FAIL" start="2026-09-04T13:49:54.588922" elapsed="0.363621"/>
+</suite>
+<status status="FAIL" start="2026-09-04T13:49:29.804881" elapsed="25.148271"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="14" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="5" fail="8" skip="0">api</stat>
+<stat pass="5" fail="14" skip="0">smoke</stat>
+<stat pass="0" fail="6" skip="0">ui</stat>
+</tag>
+<suite>
+<stat pass="5" fail="14" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="5" fail="8" skip="0" id="s1-s1" name="Api">Tests.Api</stat>
+<stat pass="3" fail="8" skip="0" id="s1-s1-s1" name="Api Smoke">Tests.Api.Api Smoke</stat>
+<stat pass="2" fail="0" skip="0" id="s1-s1-s2" name="Health Check">Tests.Api.Health Check</stat>
+<stat pass="0" fail="6" skip="0" id="s1-s2" name="Ui">Tests.Ui</stat>
+<stat pass="0" fail="6" skip="0" id="s1-s2-s1" name="Smoke">Tests.Ui.Smoke</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
