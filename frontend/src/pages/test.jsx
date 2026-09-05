@@ -2,6 +2,7 @@ import { Button } from "../components/ui/button";
 import { cn } from "../lib/utils";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { RotateCcw, Timer, Loader2 } from "lucide-react";
+import { formatTime } from "../utils/format_time";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -14,13 +15,9 @@ const durationOptions = [
 // How many lines of text stay visible in the viewport, and how many lines
 // of "look-ahead" context are kept above the caret before the text scrolls.
 const VISIBLE_LINES = 10;
-const BUFFER_LINES = 3;
+const BUFFER_LINES = 1;
 
-function formatTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${m}:${s.toString().padStart(2, "0")}`;
-}
+
 
 export default function Test() {
   const [duration, setDuration] = useState(60);
@@ -41,10 +38,6 @@ export default function Test() {
   const viewportRef = useRef(null);
 
   const content = text?.content ?? "";
-  const progress = content.length
-    ? Math.min(100, Math.round((input.length / content.length) * 100))
-    : 0;
-
   const fetchText = useCallback(async () => {
     setLoadingText(true);
     try {
